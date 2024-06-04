@@ -8,9 +8,56 @@
     <script src="main.js" defer></script>
 </head>
 <body>
+    <form id="dataForm">
+        <label for="id">ID:</label>
+        <input type="text" id="id">
+        <label for="name">Name:</label>
+        <input type="text" id="name">
+        <label for="age">Age:</label>
+        <input type="number" id="age">
+        <label for="email">Email:</label>
+        <input type="email" id="email">
+        <label for="phone">Phone No:</label>
+        <input type="tel" id="phone">
+        <button type="button" onclick="addRow()">Add Row</button>
+    </form>
+
+    <table id="dataTable">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Age</th>
+                <th>Email</th>
+                <th>Phone No</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Table rows will be dynamically added here -->
+        </tbody>
+    </table>
+
+</body>
+</html>
+
+<!-- <body>
+
+    <form >
+        <label for="id">Id</label>
+        <input type="number" id="id" name="id">
+        <label for="name">Name</label>
+        <input type="text" id="name" name="name">
+        <label for="age">Age</label>
+        <input type="number" id="age" name="age">
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email">
+        <label for="phone">Phone Number</label>
+        <input type="number" id="phone" name="phone number">
+        <button type="submit">Submit</button>
+    </form>
     <div class="container">
         <h1>Dynamic User Data Table</h1>
         <div id="tableContainer"></div>
     </div>
 </body>
-</html>
+</html> -->

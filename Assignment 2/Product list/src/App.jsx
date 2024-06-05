@@ -22,6 +22,11 @@ function App() {
       description: 'This is a description for product 3.',
       image: img3,
     },
+    {
+      title: 'Product 4',
+      description: 'This is a description for product 4.',
+      image: img3,
+    },
   ];
 
   return (

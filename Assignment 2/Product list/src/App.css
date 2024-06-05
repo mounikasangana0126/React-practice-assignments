@@ -1,0 +1,20 @@
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+.card-list {
+  display: flex;
+  gap: 40px;
+}
+.card{
+  box-shadow: 2px 2px 4px gray;
+  padding: 4px;
+}
+img{
+  width: 300px;
+  height: 250px;
+}
+

@@ -1,35 +1,59 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+
+import React, { useState, useEffect } from 'react';
+import FilterPanel from './Filters';
+import ProductList from './ProductList';
 import './App.css'
 
-function App() {
-  const [count, setCount] = useState(0)
+const App = () => {
+  const [products, setProducts] = useState([]);
+  const [filteredProducts, setFilteredProducts] = useState([]);
+  const [category, setCategory] = useState('');
+  const [priceRange, setPriceRange] = useState([0, 1000]);
+  const [availability, setAvailability] = useState(false);
+
+  useEffect(() => {
+    // Fetch data from API
+    fetch('https://dummyjson.com/products')
+      .then(response => response.json())
+      .then(data => {
+        setProducts(data.products);
+        console.log(data.products);
+        setFilteredProducts(data.products);
+      });
+  }, []);
+
+  useEffect(() => {
+    // Apply filters whenever they change
+    let tempProducts = [...products];
+
+    if (category) {
+      tempProducts = tempProducts.filter(product => product.category === category);
+    }
+
+    tempProducts = tempProducts.filter(product => 
+      product.price >= priceRange[0] && product.price <= priceRange[1]
+    );
+
+    if (availability) {
+      tempProducts = tempProducts.filter(product => product.availabilityStatus == "In Stock" );
+    }
+
+    setFilteredProducts(tempProducts);
+  }, [category, priceRange, availability, products]);
 
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
-}
+    <div className="App">
+      <FilterPanel
+        category={category}
+        setCategory={setCategory}
+        priceRange={priceRange}
+        setPriceRange={setPriceRange}
+        availability={availability}
+        setAvailability={setAvailability}
+      />
+      <ProductList products={filteredProducts} />
+    </div>
+  );
+};
 
-export default App
+export default App;

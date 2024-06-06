@@ -1,11 +1,12 @@
 import React from 'react'
+import './App.css'
 import DataFetcher from './DataFetcher'
 
 function App() {
   return (
-    <>
-    <DataFetcher url="https://fakestoreapi.com/carts"/>
-    </>
+    <div >
+    <DataFetcher url="https://dummyjson.com/recipes"/>
+    </div>
   )
 }
 

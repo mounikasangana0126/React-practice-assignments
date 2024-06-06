@@ -4,4 +4,19 @@
   padding: 2rem;
   text-align: center;
 }
-
+.card-list{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 30px;
+}
+.card{
+  width: 300px;
+  background-color: rgb(158, 158, 241);
+  box-shadow: 2px 2px 4px rgb(100, 100, 234);
+  padding: 20px ;
+}
+img{
+  width: 200px;
+  height: 200px;
+}

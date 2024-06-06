@@ -1,5 +1,6 @@
 import { useState,useEffect } from "react";
 import React from 'react'
+import './App.css'
 
 
 function DataFetcher({url}) {
@@ -9,7 +10,7 @@ function DataFetcher({url}) {
     fetch(url)
       .then(response => response.json())
       .then(data => {
-        setData(data)
+        setData(data.recipes)
         console.log(data);
     })
       .catch(error => console.error('Error fetching data:', error));
@@ -17,17 +18,12 @@ function DataFetcher({url}) {
   return (
     <div>
        {data ? (
-        <div>
+        <div className="card-list">
           {data.map(item => (
-            <div>
-            <h3 key={item.id}>{item.id}</h3>
-            {(item.products).map(value=>(
-
-                <div>
-                    <p>{value.productId}</p>
-                    <p>{value.quantity}</p>
-                </div>
-            ))}
+            <div className="card">
+            <h3>{item.name}</h3>
+            <h5>{item.cuisine}</h5>
+            <img src={item.image} alt="" />
             </div>
           ))}
         </div>

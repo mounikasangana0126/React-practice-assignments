@@ -1,7 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 const EmployeeCard = ({ employee, onDelete, onEdit, isEditing, onSaveEdit, onCancelEdit }) => {
   const [editedEmployee, setEditedEmployee] = useState({ ...employee });
+
+  useEffect(() => {
+    setEditedEmployee({ ...employee });
+  }, [employee]);
 
   const handleDeleteClick = () => {
     onDelete(employee.id);

@@ -30,7 +30,7 @@ const EmployeeList = () => {
         {employees.map(employee => (
           <EmployeeCard
             key={employee.id}
-            employee={employee}
+            employee={employee} 
             onEdit={handleEdit}
             onDelete={deleteEmployee}
             isEditing={editingId === employee.id}

@@ -19,7 +19,6 @@ const TaskItem = ({ task, editTask, deleteTask, toggleTaskCompletion }) => {
           type="text"
           value={newText}
           onChange={(e) => setNewText(e.target.value)}
-          onBlur={handleEdit}
           onKeyDown={(e) => {
             if (e.key === 'Enter') handleEdit();
           }}

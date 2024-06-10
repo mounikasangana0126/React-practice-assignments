@@ -12,7 +12,6 @@ const App = () => {
   const [availability, setAvailability] = useState(false);
 
   useEffect(() => {
-    // Fetch data from API
     fetch('https://dummyjson.com/products')
       .then(response => response.json())
       .then(data => {
@@ -23,7 +22,6 @@ const App = () => {
   }, []);
 
   useEffect(() => {
-    // Apply filters whenever they change
     let tempProducts = [...products];
 
     if (category) {

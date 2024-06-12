@@ -14,7 +14,7 @@ const App = () => {
     const newEmployee = { ...employee, id: employees.length + 1 };
     setEmployees([...employees, newEmployee]);
   };
-
+ 
   return (
     <div className="app">
       <nav className="sidebar">
@@ -34,6 +34,6 @@ const App = () => {
       </main>
     </div> 
   );
-};
+}; 
 
 export default App;

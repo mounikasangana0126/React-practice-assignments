@@ -1,60 +1,67 @@
-import { useState,useEffect } from 'react';
-import './App.css';
+import { useState, useEffect } from "react";
+import "./App.css";
 
 const ValidationForm = () => {
   const [form, setForm] = useState({
-    name: '',
-    rollNo: '',
-    panCard: '',
-    dateOfBirth: '',
+    name: "",
+    rollNo: "",
+    panCard: "",
+    dateOfBirth: "",
   });
 
   const [errors, setErrors] = useState({});
   const [daysFromDOB, setDaysFromDOB] = useState(null);
-  const [maxDate, setMaxDate] = useState('');
-  const [minDate, setMinDate] = useState('');
+  const [maxDate, setMaxDate] = useState("");
+  const [minDate, setMinDate] = useState("");
 
   const handleChange = (e) => {
     const { name, value } = e.target;
 
-    if (name === 'name') {
+    if (name === "name") {
       if (!/^[A-Za-z]*$/.test(value)) {
         setErrors((prevErrors) => ({
           ...prevErrors,
-          name: 'Name should contain only alphabets.',
+          name: "Name should contain only alphabets.",
         }));
         return;
       } else {
         setErrors((prevErrors) => ({
           ...prevErrors,
-          name: '',
+          name: "",
         }));
       }
     }
 
-    if (name === 'panCard') {
+    if (name === "panCard") {
       if (value.length <= 5 && !/^[A-Za-z]*$/.test(value)) {
         setErrors((prevErrors) => ({
           ...prevErrors,
-          panCard: 'First 5 characters should be alphabets only.',
+          panCard: "First 5 characters should be alphabets only.",
         }));
         return;
-      } else if (value.length > 5 && value.length <= 9 && !/^[A-Za-z]{5}[0-9]*$/.test(value)) {
+      } else if (
+        value.length > 5 &&
+        value.length <= 9 &&
+        !/^[A-Za-z]{5}[0-9]*$/.test(value)
+      ) {
         setErrors((prevErrors) => ({
           ...prevErrors,
-          panCard: 'Characters 6 to 9 should be numbers only.',
+          panCard: "Characters 6 to 9 should be numbers only.",
         }));
         return;
-      } else if (value.length === 10 && !/^[A-Za-z]{5}[0-9]{4}[A-Za-z]$/.test(value)) {
+      } else if (
+        value.length === 10 &&
+        !/^[A-Za-z]{5}[0-9]{4}[A-Za-z]$/.test(value)
+      ) {
         setErrors((prevErrors) => ({
           ...prevErrors,
-          panCard: 'Last character should be an alphabet.',
+          panCard: "Last character should be an alphabet.",
         }));
         return;
       } else {
         setErrors((prevErrors) => ({
           ...prevErrors,
-          panCard: '',
+          panCard: "",
         }));
       }
     }
@@ -64,57 +71,28 @@ const ValidationForm = () => {
       [name]: value,
     }));
 
-    if (name === 'dateOfBirth') {
+    if (name === "dateOfBirth") {
       calculateDaysFromDOB(value);
     }
-  };
-
-  const validate = () => {
-    const newErrors = {};
-
-    if (!/^[A-Za-z]+$/.test(form.name)) {
-      newErrors.name = 'Name should contain only alphabets.';
-    }
-
-    if (!/^[A-Za-z]{5}[0-9]{4}[A-Za-z]$/.test(form.panCard)) {
-      newErrors.panCard = 'PAN Card should follow the pattern: 5 alphabets, 4 digits, 1 alphabet.';
-    }
-
-    const dob = new Date(form.dateOfBirth);
-    const today = new Date();
-    if (dob >= today) {
-      newErrors.dateOfBirth = 'Date of birth cannot be today or a future date.';
-    } else if (today.getFullYear() - dob.getFullYear() > 100) {
-      newErrors.dateOfBirth = 'Year of birth should be within the last 100 years.';
-    }
-
-    setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
   };
 
   useEffect(() => {
     let today = new Date();
     let max = new Date(today);
     max.setDate(max.getDate() - 1);
-    const maxISOString = max.toISOString().split('T')[0];
+    const maxISOString = max.toISOString().split("T")[0];
     let min = new Date(today);
     min.setFullYear(min.getFullYear() - 100);
-    const minISOString = min.toISOString().split('T')[0];
+    const minISOString = min.toISOString().split("T")[0];
     setMinDate(minISOString);
     setMaxDate(maxISOString);
   }, []);
 
-
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (validate()) {
-      console.log('Form submitted successfully', form);
-      alert('Form submitted successfully!');
-    }
+    alert("Form submitted successfully!");
   };
 
-
-  
   const calculateDaysFromDOB = (date) => {
     const selectedDate = new Date(date);
     const today = new Date();
@@ -137,7 +115,7 @@ const ValidationForm = () => {
               onChange={handleChange}
               required
               className="input"
-              placeholder='Mounika'
+              placeholder="Mounika"
             />
             {errors.name && <p className="error">{errors.name}</p>}
           </div>
@@ -151,7 +129,7 @@ const ValidationForm = () => {
               required
               maxLength={8}
               className="input"
-              placeholder='12345678'
+              placeholder="12345678"
             />
           </div>
           <div className="form-group">
@@ -164,7 +142,7 @@ const ValidationForm = () => {
               required
               maxLength={10}
               className="input"
-              placeholder='AZNPH7488K'
+              placeholder="AZNPH7488K"
             />
             {errors.panCard && <p className="error">{errors.panCard}</p>}
           </div>
@@ -180,16 +158,22 @@ const ValidationForm = () => {
               max={maxDate}
               className="input"
             />
-            {errors.dateOfBirth && <p className="error">{errors.dateOfBirth}</p>}
+            {errors.dateOfBirth && (
+              <p className="error">{errors.dateOfBirth}</p>
+            )}
             {daysFromDOB !== null && (
-              <p className="info">Total days since date of birth: {daysFromDOB} days</p>
+              <p className="info">
+                Total days since date of birth: {daysFromDOB} days
+              </p>
             )}
           </div>
-          <button type="submit" className="button">Submit</button>
+          <button type="submit" className="button">
+            Submit
+          </button>
         </form>
       </div>
     </div>
   );
 };
 
-export default ValidationForm
+export default ValidationForm;

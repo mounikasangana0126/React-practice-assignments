@@ -1,0 +1,35 @@
+
+*{
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+}
+.App{
+  text-align: center;
+}
+input{
+  margin: 40px 0px;
+  font-size: 20px;
+}
+table{
+  margin: 20px;
+}
+
+table,thead,tbody,tr,td,th{
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+
+td,th{
+  padding: 8px;
+  text-align: center;
+}
+button{
+  width: 60px;
+  height: 30px;
+  margin: 10px;
+  border: none;
+  background-color: rgb(112, 112, 238);
+  color: white;
+  border-radius: 10px;
+}

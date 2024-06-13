@@ -8,8 +8,8 @@ import MultipleFiles from './MultipleFiles';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App/>
-    {/* <MultipleFiles/> */}
+    {/* <App/> */}
+    <MultipleFiles/>
   </React.StrictMode>
 );
 

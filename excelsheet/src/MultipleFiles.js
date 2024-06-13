@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import * as XLSX from "xlsx";
 import "./App.css";
 import Component from "./Component";
@@ -8,6 +8,10 @@ function MultipleFiles() {
   const [option,setOption]=useState("")
   const [titles,setTitles]=useState([])
   
+  useEffect(()=>{
+    setOption("")
+  },[value])
+
   function handleXl(e) {
     const file = e.target.files[0];
     const reader = new FileReader();
@@ -29,8 +33,6 @@ function MultipleFiles() {
     };
     reader.readAsArrayBuffer(file);
   }
-
-
 
   return (
     <div className="App">

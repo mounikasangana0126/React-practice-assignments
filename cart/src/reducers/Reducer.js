@@ -1,4 +1,4 @@
-import { ADD_ITEM, REMOVE_ITEM, UPDATE_ITEM } from '../actions/AddToCart';
+import { ADD_ITEM, REMOVE_ITEM, COUNTER } from '../actions/AddToCart';
 
 const initialState = {
   items: [],
@@ -10,7 +10,7 @@ export const reducer = (state = initialState, action) => {
       return { ...state, items: [...state.items, action.payload] };
     case REMOVE_ITEM:
       return { ...state, items: state.items.filter(item => item.id !== action.payload) };
-    case UPDATE_ITEM:
+    case COUNTER:
       return {
         ...state,
         items: state.items.map(item =>

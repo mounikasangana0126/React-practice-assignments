@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import { addItem } from '../actions/AddToCart';
 import '../App.css'
 
-const Items = ({ menuItems }) => {
+const Items = ({ products }) => {
   const dispatch = useDispatch();
 
   const handleAddItem = (item) => {
@@ -11,11 +11,17 @@ const Items = ({ menuItems }) => {
   };
 
   return (
-    <div className="menu-container">
-      {menuItems.map((item) => (
-        <div key={item.id} className="menu-item">
-          <span><img src={item.image} alt='images'/>{item.name} - ${item.price}</span>
+    <div className="cart-container">
+      {products.map((item) => (
+        <div key={item.id} className="item">
+          <div>
+          <img src={item.image} alt='images'/>
+          </div>
+          <div>
+          <div><b>{item.name}</b></div> 
+          <div>${item.price}</div>
           <button onClick={() => handleAddItem(item)}>Add To Cart</button>
+          </div>
         </div>
       ))}
     </div>

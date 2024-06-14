@@ -1,6 +1,6 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { removeItem, updateItem } from "../actions/AddToCart";
+import { removeItem, counter } from "../actions/AddToCart";
 import "../App.css";
 
 const Cart = ({ item }) => {
@@ -11,29 +11,32 @@ const Cart = ({ item }) => {
   };
 
   const handleIncrement = () => {
-    dispatch(updateItem(item.id, item.quantity + 1));
+    dispatch(counter(item.id, item.quantity + 1));
   };
 
   const handleDecrement = () => {
     if (item.quantity > 1) {
-      dispatch(updateItem(item.id, item.quantity - 1));
+      dispatch(counter(item.id, item.quantity - 1));
     }
   };
 
   return (
-    <div className="bill-item">
+    <div className="cart-item">
       <div>
-        <p>{item.name}</p>
-        <p>${item.price.toFixed(2)}</p>
+        <img src={item.image}/>
       </div>
       <div>
+        <p><b>{item.name}</b></p>
+        <p>${item.price.toFixed(2)}</p>
+      </div>
+      <div className="counter">
         <button onClick={handleDecrement}>-</button>
         <span>{item.quantity}</span>
         <button onClick={handleIncrement}>+</button>
       </div>
       <p>${(item.price * item.quantity).toFixed(2)}</p>
       <p>
-        <button onClick={handleRemove}>Remove</button>
+        <button onClick={handleRemove} className="remove">Remove</button>
       </p>
     </div>
   );

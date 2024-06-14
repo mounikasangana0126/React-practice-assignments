@@ -9,7 +9,7 @@ const CartItems = () => {
   const totalPrice = items.reduce(
     (acc, item) => acc + item.price * item.quantity,
     0
-  );
+  );  
 
   return (
     <div>
@@ -19,7 +19,7 @@ const CartItems = () => {
             <Cart key={item.id} item={item} />
           ))}
           
-      <h3>Total: ${totalPrice.toFixed(2)}</h3>
+      <h3 className="total">Total: $<span>{totalPrice.toFixed(2)}</span></h3>
     </div>
   );
 };

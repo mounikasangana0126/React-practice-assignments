@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
 const RegisterEmployee = ({ addEmployee }) => {
   const [form, setForm] = useState({
-    name: '',
-    email: '',
-    position: '',
+    name: "",
+    email: "",
+    position: "",
   });
 
   const handleChange = (e) => {
@@ -14,10 +14,10 @@ const RegisterEmployee = ({ addEmployee }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     addEmployee(form);
-    setForm({ 
-      name: '',
-      email: '',
-      position: '',
+    setForm({
+      name: "",
+      email: "",
+      position: "",
     });
   };
 
@@ -27,15 +27,33 @@ const RegisterEmployee = ({ addEmployee }) => {
       <form onSubmit={handleSubmit}>
         <div>
           <label>Name:</label>
-          <input type="text" name="name" value={form.name} onChange={handleChange} required />
+          <input
+            type="text"
+            name="name"
+            value={form.name}
+            onChange={handleChange}
+            required
+          />
         </div>
         <div>
           <label>Email:</label>
-          <input type="email" name="email" value={form.email} onChange={handleChange} required />
+          <input
+            type="email"
+            name="email"
+            value={form.email}
+            onChange={handleChange}
+            required
+          />
         </div>
         <div>
           <label>Position:</label>
-          <input type="text" name="position" value={form.position} onChange={handleChange} required />
+          <input
+            type="text"
+            name="position"
+            value={form.position}
+            onChange={handleChange}
+            required
+          />
         </div>
         <button type="submit">Register</button>
       </form>

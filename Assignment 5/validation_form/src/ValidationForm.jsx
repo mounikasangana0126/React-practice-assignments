@@ -1,6 +1,21 @@
 import { useState, useEffect } from "react";
 import "./App.css";
 
+const months = {
+  1: 31,
+  2: 28,
+  3: 31,
+  4: 30,
+  5: 31,
+  6: 30,
+  7: 31,
+  8: 31,
+  9: 30,
+  10: 31,
+  11: 30,
+  12: 31,
+};
+
 const ValidationForm = () => {
   const [form, setForm] = useState({
     name: "",
@@ -91,14 +106,91 @@ const ValidationForm = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     alert("Form submitted successfully!");
+    console.log(months);
   };
 
   const calculateDaysFromDOB = (date) => {
-    const selectedDate = new Date(date);
-    const today = new Date();
-    const timeDiff = today.getTime() - selectedDate.getTime();
-    const daysDiff = Math.floor(timeDiff / (1000 * 3600 * 24));
-    setDaysFromDOB(daysDiff);
+    function isLeap(yearcheck) {
+      return (
+        (yearcheck % 4 === 0 && yearcheck % 100 !== 0) || yearcheck % 400 === 0
+      );
+    }
+
+    let totalDays = 0;
+    const selectedDateAndTime = new Date(date);
+    const todayDateAndTime = new Date();
+    const todayDate = todayDateAndTime.toISOString().split("T")[0].split("-");
+    const selectedDate = selectedDateAndTime
+      .toISOString()
+      .split("T")[0]
+      .split("-");
+    const year = 0;
+    const month = 1;
+    const day = 2;
+    const noofmonths = 12;
+    const leapfeb = 29;
+
+    if (selectedDate[year] !== todayDate[year]) {
+      for (
+        let yearcheck = parseInt(selectedDate[year]) + 1;
+        yearcheck < parseInt(todayDate[year]);
+        yearcheck++
+      ) {
+        if (isLeap(yearcheck)) {
+          totalDays += 366;
+        } else {
+          totalDays += 365;
+        }
+      }
+      let startmonth = parseInt(selectedDate[month]);
+      for (
+        startmonth = startmonth + 1;
+        startmonth <= noofmonths;
+        startmonth++
+      ) {
+        console.log(startmonth);
+        totalDays = totalDays + months[startmonth];
+        console.log(months[startmonth]);
+      }
+      let endmonth = parseInt(todayDate[month]);
+      for (let endmonthcheck = 1; endmonthcheck < endmonth; endmonthcheck++) {
+        totalDays = totalDays + months[endmonthcheck];
+        console.log(months[endmonthcheck]);
+      }
+
+      totalDays =
+        totalDays +
+        (months[parseInt(selectedDate[month])] - parseInt(selectedDate[day])+1);
+
+      totalDays = totalDays + parseInt(todayDate[day]);
+    } else {
+      if (isLeap(parseInt(selectedDate[year]))) {
+        months[day] = leapfeb;
+      }
+      console.log("now");
+      let selectedDateInteger = parseInt(selectedDate[month]);
+      let todayDateInteger = parseInt(todayDate[month]);
+      if (selectedDateInteger !== todayDateInteger) {
+        for (
+          let sameYear = selectedDateInteger + 1;
+          sameYear < todayDateInteger;
+          sameYear++
+        ) {
+          totalDays = totalDays + months[sameYear];
+          console.log(totalDays);
+        }
+        totalDays =
+          totalDays +
+          (months[parseInt(selectedDate[month])] - parseInt(selectedDate[day])-1);
+
+        totalDays = totalDays + parseInt(todayDate[day])+1;
+      } else {
+        totalDays = todayDate[day] - selectedDate[day];
+        console.log(totalDays);
+      }
+    }
+    setDaysFromDOB(totalDays);
+    totalDays = 0;
   };
 
   return (
@@ -112,6 +204,7 @@ const ValidationForm = () => {
               type="text"
               name="name"
               value={form.name}
+              onBlur={handleChange}
               onChange={handleChange}
               required
               className="input"
@@ -126,6 +219,7 @@ const ValidationForm = () => {
               name="rollNo"
               value={form.rollNo}
               onChange={handleChange}
+              onBlur={handleChange}
               required
               maxLength={8}
               className="input"
@@ -139,6 +233,7 @@ const ValidationForm = () => {
               name="panCard"
               value={form.panCard}
               onChange={handleChange}
+              onBlur={handleChange}
               required
               maxLength={10}
               className="input"
@@ -153,6 +248,7 @@ const ValidationForm = () => {
               name="dateOfBirth"
               value={form.dateOfBirth}
               onChange={handleChange}
+              onBlur={handleChange}
               required
               min={minDate}
               max={maxDate}
@@ -175,5 +271,4 @@ const ValidationForm = () => {
     </div>
   );
 };
-
 export default ValidationForm;

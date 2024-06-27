@@ -20,7 +20,7 @@ app.post('/applicationform', async (req, res) => {
   }
 });
 
-app.get('/students', async (req, res) => {
+app.get('/', async (req, res) => {
   try {
     const students = await StudentModel.find();
     res.json(students);
@@ -72,3 +72,4 @@ app.delete('/students/:id', async (req, res) => {
 app.listen(port, () => {
   console.log(`Server is running on http://localhost:${port}`);
 });
+

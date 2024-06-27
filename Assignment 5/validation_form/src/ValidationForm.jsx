@@ -28,6 +28,7 @@ const ValidationForm = () => {
   const [daysFromDOB, setDaysFromDOB] = useState(null);
   const [maxDate, setMaxDate] = useState("");
   const [minDate, setMinDate] = useState("");
+  const [dobaria, setDobAria] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -87,6 +88,18 @@ const ValidationForm = () => {
     }));
 
     if (name === "dateOfBirth") {
+      // console.log((value.split("-")));
+      // const dob_day=value.split("-")[2];
+      // const dob_month=value.split("-")[1];
+      // const dob_year=value.split("-")[0];
+      if (! (value < maxDate) || !(value>minDate)) {
+        setErrors((prevErrors) => ({
+          ...prevErrors,
+          dateOfBirth: `Date Of Birth should be in between ${minDate} and ${maxDate}`,
+        }));
+        setDobAria(true)
+        return;
+      } 
       calculateDaysFromDOB(value);
     }
   };
@@ -102,6 +115,7 @@ const ValidationForm = () => {
     setMinDate(minISOString);
     setMaxDate(maxISOString);
   }, []);
+  
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -199,10 +213,11 @@ const ValidationForm = () => {
         <h2 className="heading">Registration Form</h2>
         <form onSubmit={handleSubmit} className="form">
           <div className="form-group">
-            <label className="label">Name:</label>
+            <label htmlFor="name" className="label">Name:</label>
             <input
               type="text"
               name="name"
+              id="name"
               value={form.name}
               onBlur={handleChange}
               onChange={handleChange}
@@ -213,10 +228,11 @@ const ValidationForm = () => {
             {errors.name && <p className="error">{errors.name}</p>}
           </div>
           <div className="form-group">
-            <label className="label">Roll No:</label>
+            <label htmlFor="rollNo" className="label">Roll No:</label>
             <input
               type="text"
               name="rollNo"
+              id="rollNo"
               value={form.rollNo}
               onChange={handleChange}
               onBlur={handleChange}
@@ -227,10 +243,11 @@ const ValidationForm = () => {
             />
           </div>
           <div className="form-group">
-            <label className="label">PAN Card:</label>
+            <label htmlFor="panCard" className="label">PAN Card:</label>
             <input
               type="text"
               name="panCard"
+              id="panCard"
               value={form.panCard}
               onChange={handleChange}
               onBlur={handleChange}
@@ -242,14 +259,16 @@ const ValidationForm = () => {
             {errors.panCard && <p className="error">{errors.panCard}</p>}
           </div>
           <div className="form-group">
-            <label className="label">Date of Birth:</label>
+            <label htmlFor="dob" className="label">Date of Birth:</label>
             <input
               type="date"
               name="dateOfBirth"
+              id="dob"
               value={form.dateOfBirth}
               onChange={handleChange}
               onBlur={handleChange}
               required
+              aria-invalid={dobaria}
               min={minDate}
               max={maxDate}
               className="input"
@@ -258,7 +277,7 @@ const ValidationForm = () => {
               <p className="error">{errors.dateOfBirth}</p>
             )}
             {daysFromDOB !== null && (
-              <p className="info">
+              <p className="info" data-testid="daysCount">
                 Total days since date of birth: {daysFromDOB} days
               </p>
             )}

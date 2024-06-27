@@ -1,66 +1,63 @@
 import React, { useState } from "react";
 import axios from "axios";
-import {useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
-function Login() {
+const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
-    axios
-      .post("http://localhost:3000/login", {
+  
+    try {
+      const response = await axios.post("http://localhost:3000/login", {
         email,
         password,
-      })
-      .then((response) => {
-        const token = response.data.token;
-        if (token) {
-          localStorage.setItem("token", token);
-          navigate("/home");
-        } else {
-          setError("Invalid credentials");
-        }
-      })
-      .catch((err) => {
-        console.error("Login error:", err);
-        setError("Something went wrong");
       });
+  
+      const token = response.data.token;
+      localStorage.setItem("token", token); // Store token in localStorage
+  
+      // Redirect to home or dashboard page based on your application logic
+      navigate("/home");
+    } catch (error) {
+      console.error("Login error:", error);
+      setError("Invalid credentials"); // Update error message for incorrect login details
+    }
   };
+  
 
   return (
     <div>
-      <form id="loginForm" onSubmit={handleLogin}>
-        <h2>Student Login Form</h2>
-
-        <label htmlFor="email">Email:</label>
-        <input
-          type="email"
-          id="email"
-          name="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-        />
-
-        <label htmlFor="password">Password:</label>
-        <input
-          type="password"
-          id="password"
-          name="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
-        />
-
+      <h2>Login</h2>
+      <form onSubmit={handleLogin}>
+        <div>
+          <label htmlFor="email">Email:</label>
+          <input
+            type="email"
+            id="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+          />
+        </div>
+        <div>
+          <label htmlFor="password">Password:</label>
+          <input
+            type="password"
+            id="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+          />
+        </div>
         {error && <p>{error}</p>}
-
-        <input type="submit" value="Submit" />
+        <button type="submit">Login</button>
       </form>
     </div>
   );
-}
+};
 
 export default Login;

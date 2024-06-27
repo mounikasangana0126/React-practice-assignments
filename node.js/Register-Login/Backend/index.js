@@ -65,15 +65,6 @@ app.post('/login',async (req,res)=>{
             return res.json({token})
         })
 
-        // let newUser=new Registeruser({
-        //     username,
-        //     email,
-        //     password,
-        //     confirmpassword
-        // })
-        // await newUser.save();
-        // return res.status(200).send('Login successfully')
-
     }
     catch(err){
         console.log(err);

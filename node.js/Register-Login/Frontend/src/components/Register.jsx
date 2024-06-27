@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "../App";
-import { Link } from "react-router-dom";
+import { Link,useNavigate } from "react-router-dom";
 import axios from "axios";
 
 function Register() {
@@ -8,6 +8,7 @@ function Register() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmpassword, setConfirmPassword] = useState("");
+  const navigate = useNavigate();
 
   const handleRegister = (e) => {
     e.preventDefault();
@@ -18,7 +19,8 @@ function Register() {
       confirmpassword
     })
     .then(result => {
-      console.log(result.data);  
+      console.log(result.data); 
+      navigate("/login"); 
     })
     .catch(err => {
       console.error(err);

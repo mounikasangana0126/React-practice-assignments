@@ -62,7 +62,7 @@ describe('ValidationForm component', () => {
         // Wait for the days count element to appear with updated content
         await waitFor(() => {
           const daysCountElement = screen.getByTestId('daysCount');
-          expect(daysCountElement.textContent).toContain('Total days since date of birth:');
+          expect(daysCountElement.textContent).toContain('Total days since date of birth: 777 days');
         });
       });
       

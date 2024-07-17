@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import '../App.css'; // Assuming you have styles for Add component
+import '../App.css'; 
 
 function Add({ onSelect }) {
   const [selectedItem, setSelectedItem] = useState(null);
@@ -10,14 +10,15 @@ function Add({ onSelect }) {
 
   const handleAddClick = () => {
     if (selectedItem) {
-      onSelect(selectedItem); // Callback to parent component with selected item
+      onSelect(selectedItem); 
     } else {
-      alert('Please select an option.'); // Optional: Provide feedback if no option is selected
+      alert('Please select an option.'); 
     }
   };
 
   return (
     <>
+    
       <div className='dropdown'>
         <select value={selectedItem} onChange={handleSelectChange}>
           <option value="">Choose:</option>

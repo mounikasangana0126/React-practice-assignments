@@ -42,7 +42,7 @@
 .template{
   display: flex;
   flex-direction: column;
-  gap: 40px;
+  gap: 50px;
   justify-content: center;
   align-items: center;
 }
@@ -62,18 +62,54 @@
 .condition-container {
   display: flex;
   align-items: center;
+  position: relative;
+  margin-bottom: 30px;
 }
 
 .horizontal-line {
-  width: 40px; 
+  position: relative;
+  width: 80px; 
   height: 1px;  
   background-color: black;
 }
 
 .horizontal-line.left {
-  margin-right: 10px; 
+  position: absolute;
+  left: -80px;
+  text-align: center;
 }
 
 .horizontal-line.right {
-  margin-left: 10px; 
+  position: absolute;
+  right: -80px;
+  text-align: center;
+}
+
+.vertical-line {
+  position:absolute;
+  top: 0;
+  width: 1px; 
+  height: 40px;  
+  background-color:black;
+}
+.vertical-line-left{
+  position: relative;
+  top: -20px;
+  left: 0px;
+}
+.vertical-line-right{
+  position: relative;
+  top:-20px;
+  left: 80px;
+  /* right:-50px; */
+}
+.vertical-line .leftinput{
+  position: absolute;
+  top: 40px;
+  margin-left: -80px;
+}
+.vertical-line .rightinput{
+  position: absolute;
+  top: 40px;
+  margin-left: -80px;
 }

@@ -17,11 +17,13 @@ function Template() {
 
   return (
     <div className='template'>
-      <div className='oval'>START</div>
+      <div className='oval container'>START
+        <div className='middleline start'></div>
+      </div>
       {selectedItems.map((item, index) => (
         <div key={index}>
           {item === 'condition' ? (
-            <Condition key={index} /> 
+            <Condition key={index} handleSelectItem={handleSelectItem}/> 
           ) : item === 'statement' ? (
             <Statement/>
           ) : item === 'end' ? (

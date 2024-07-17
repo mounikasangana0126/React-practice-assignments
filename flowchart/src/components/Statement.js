@@ -2,8 +2,9 @@ import React from 'react'
 
 function Statement() {
   return (
-    <div>
+    <div className='container'>
       <input type='text' className='statement' placeholder="statement"/>
+      <div className='middleline statement'></div>
     </div>
   )
 }

@@ -54,8 +54,7 @@
   height: 50px;
   display: flex;
   justify-content: center;
-  align-items: center;
-  
+  align-items: center
 }
 
 
@@ -112,4 +111,19 @@
   position: absolute;
   top: 40px;
   margin-left: -80px;
+}
+
+.container{
+  position: relative;
+}
+.container .middleline{
+  position: absolute;
+  width: 1px;
+  height: 45px;
+  background-color: black;
+  left: 50%;
+  margin-top: 5px;
+}
+.container .start{
+  top: 50px;
 }

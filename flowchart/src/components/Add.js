@@ -17,8 +17,8 @@ function Add({ onSelect }) {
   };
 
   return (
-    <>
-    
+    <div className='addcontainer'>
+    <div className='middleline'></div>
       <div className='dropdown'>
         <select value={selectedItem} onChange={handleSelectChange}>
           <option value="">Choose:</option>
@@ -28,7 +28,7 @@ function Add({ onSelect }) {
         </select>
         <button onClick={handleAddClick}>Add</button>
       </div>
-    </>
+    </div>
   );
 }
 

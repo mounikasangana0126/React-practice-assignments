@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "../App.css";
 import Add from "./Add";
-function Condition() {
+function Condition(props) {
   const [condition, setCondition] = useState("");
 
   const conditionHandleChange = (e) => {
